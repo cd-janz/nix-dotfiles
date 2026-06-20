@@ -1,10 +1,23 @@
 { pkgs, config, ... }:
+let
+  ankamaAppImagePath = "/home/janz/.local/share/ankama/ankama_launcher.AppImage";
+
+  ankamaDesktop = pkgs.makeDesktopItem {
+    name = "ankama-launcher";
+    desktopName = "Ankama Launcher";
+    exec = "${pkgs.appimage-run}/bin/appimage-run ${ankamaAppImagePath}";
+    icon = "ankama-launcher"; # Usa el icono del sistema si existe, o puedes poner una ruta a un .png
+    categories = [ "Game" ];
+    terminal = false;
+  };
+in
 {
 
   environment.systemPackages = with pkgs; [
     # PROGRAMS
     protonup-qt
     heroic
+    ankamaDesktop
 
     # UTILITIES
     goverlay

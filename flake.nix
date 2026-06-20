@@ -9,10 +9,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
     ags.url = "github:aylur/ags";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, hyprland, ... }@inputs:
     let 
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -30,7 +32,7 @@
 	    home-manager.useGlobalPkgs = true;
 	    home-manager.useUserPackages = true;
 
-	    home-manager.users.janz = import ./users/janz/home.nix;
+	    home-manager.users.janz = import ./homes/janz/home.nix;
 
 	    home-manager.extraSpecialArgs = { inherit inputs; };
 	  }

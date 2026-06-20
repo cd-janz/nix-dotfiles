@@ -1,6 +1,12 @@
 { config, pkgs, ... }:
 
 {
+
+  imports = [
+    ./hypr.nix
+    ./nvim.nix
+  ];
+
   home.username = "janz";
   home.homeDirectory = "/home/janz";
   home.stateVersion = "25.11";

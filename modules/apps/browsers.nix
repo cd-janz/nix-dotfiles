@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   environment.systemPackages = with pkgs; [
     librewolf
-    # zen-browser
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
   environment.sessionVariables = {
     DEFAULT_BROWSER = "librewolf";

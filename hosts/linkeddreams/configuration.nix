@@ -8,18 +8,23 @@
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
+	nixpkgs.config = {
+		allowBroken = true;
+		problems.handlers = {
+			"lua5.1-magick-1.6.0-1".broken = "warn";
+		};
+	};
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 5;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  boot.loader.efi.efiSysMountPoint = "/boot";
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelModules = [ "asus-nb-wmi" ];
-  boot.kernelParams = [ "ipv6.disable=1" ];
 
   hardware.graphics = {
     enable = true;
@@ -104,11 +109,16 @@
     };
   };
 
+  services.xserver.enable = true;
+  programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
+  services.desktopManager.plasma6.enable = true;
+
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.greetd.enableGnomeKeyring = true;
+  programs.seahorse.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.janz = {
@@ -127,6 +137,12 @@
     adwaita-icon-theme
     bibata-cursors
     appimage-run
+
+    jetbrains.datagrip
+    jetbrains.goland
+    antigravity
+    jetbrains.pycharm
+
   ];
 
   programs.sway.enable = true;

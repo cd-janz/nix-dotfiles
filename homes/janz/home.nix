@@ -20,5 +20,10 @@
   programs.git.settings = {
     name = "cd-janz";
     email = "cd.juanzuniga@gmail.com";
+		credential = {
+			"https://github.com" = {
+				useHttpPath = true;
+			};
+		};
   };
 }

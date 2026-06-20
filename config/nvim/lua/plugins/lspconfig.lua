@@ -136,7 +136,6 @@ return {
 		},
 	},
 	config = function()
-		local lspconfig = require("lspconfig")
 		local cmp_capabilities = require("blink.cmp").get_lsp_capabilities({}, false)
 
 		local servers = {
@@ -157,10 +156,14 @@ return {
 			"kotlin_lsp",
 		}
 
+		-- La nueva API nativa de Neovim 0.11 para configuración declarativa global
 		for _, lsp in ipairs(servers) do
-			lspconfig[lsp].setup({
+			vim.lsp.config(lsp, {
 				capabilities = cmp_capabilities,
 			})
 		end
+
+		-- Inicia automáticamente los servidores configurados en los buffers correspondientes
+		vim.lsp.enable(servers)
 	end,
 }

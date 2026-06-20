@@ -20,7 +20,7 @@
     lua-language-server
     
     # Web & Frontend
-    nodePackages.typescript-language-server
+		typescript-language-server
     tailwindcss-language-server
     vscode-langservers-extracted # Provee html, cssls, jsonls, eslint
     astro-language-server

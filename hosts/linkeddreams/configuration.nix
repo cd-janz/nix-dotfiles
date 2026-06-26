@@ -26,6 +26,26 @@
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelModules = [ "asus-nb-wmi" ];
 
+	zramSwap = {
+		enable = true;
+		algorithm = "zstd";
+		memoryPercent = 50;
+		priority = 100;
+	};
+
+	programs.nix-ld.enable = true;
+  
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc.lib
+    zlib
+    glib
+  ];
+
+	documentation.enable = false;
+  documentation.doc.enable = false;
+  documentation.info.enable = false;
+  documentation.dev.enable = false;
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -140,8 +160,11 @@
 
     jetbrains.datagrip
     jetbrains.goland
-    antigravity
     jetbrains.pycharm
+		jetbrains.webstorm
+		jetbrains.rider
+		jetbrains.idea
+    antigravity
 
   ];
 

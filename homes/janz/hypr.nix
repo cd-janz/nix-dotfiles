@@ -7,5 +7,10 @@
   };
   home.packages = with pkgs; [
     rofi
+		hyprshot
+  	grim
+  	slurp
+  	wl-clipboard
+  	swappy
   ];
 }

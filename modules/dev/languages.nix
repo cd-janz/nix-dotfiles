@@ -13,9 +13,7 @@
     gradle
     maven
 
-    python3
-    python3Packages.pip
-    python3Packages.virtualenv
+		python311
 
     go_1_26
     gopls
@@ -28,6 +26,8 @@
 		bun
 
 		rustup
+
+		mariadb.client
 
   ];
 
